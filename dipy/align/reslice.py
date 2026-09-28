@@ -106,6 +106,7 @@ def reslice(data, affine, zooms, new_zooms, order=1, mode='constant', cval=0,
                 for i, res in enumerate(pool.imap(_affine_transform, params)):
                     data2[..., i] = res
                 pool.close()
+                pool.join()
 
         Rx = np.eye(4)
         Rx[:3, :3] = np.diag(R)
